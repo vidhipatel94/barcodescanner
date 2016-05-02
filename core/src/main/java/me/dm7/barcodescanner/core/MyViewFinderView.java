@@ -20,17 +20,17 @@ public class MyViewFinderView extends View implements IViewFinder {
     private static final int MIN_FRAME_WIDTH = 240;
     private static final int MIN_FRAME_HEIGHT = 240;
 
-    private static final float LANDSCAPE_HEIGHT_RATIO = 5f / 8;
-    private static final int LANDSCAPE_MAX_FRAME_HEIGHT = (int) (1080 * LANDSCAPE_HEIGHT_RATIO); // = 5/8 * 1080
-
-    private static final float PORTRAIT_WIDTH_RATIO = 5.5f / 8;
-    private static final int PORTRAIT_MAX_FRAME_WIDTH = (int) (1080 * PORTRAIT_WIDTH_RATIO); // = 7/8 * 1080
+    private static final float DEFAULT_LANDSCAPE_HEIGHT_RATIO = 5f / 8;
+    private static final float DEFAULT_PORTRAIT_WIDTH_RATIO = 5.5f / 8;
 
     private final int mDefaultLaserColor = getResources().getColor(R.color.viewfinder_laser);
     private final int mDefaultMaskColor = getResources().getColor(R.color.viewfinder_mask);
     private final int mDefaultBorderColor = getResources().getColor(R.color.viewfinder_border);
     private final int mDefaultBorderStrokeWidth = getResources().getInteger(R.integer.viewfinder_border_width);
     private final int mDefaultBorderLineLength = 60;
+
+    private float portraitWidthRatio = DEFAULT_PORTRAIT_WIDTH_RATIO;
+    private float landscapeHeightRatio = DEFAULT_LANDSCAPE_HEIGHT_RATIO;
 
     protected Paint mLaserPaint;
     protected Paint mFinderMaskPaint;
@@ -91,6 +91,16 @@ public class MyViewFinderView extends View implements IViewFinder {
     }
 
     @Override
+    public void setPortraitWidthRatio(float portraitWidthRatio) {
+        this.portraitWidthRatio = portraitWidthRatio;
+    }
+
+    @Override
+    public void setLandscapeHeightRatio(float landscapeHeightRatio) {
+        this.landscapeHeightRatio = landscapeHeightRatio;
+    }
+
+    @Override
     public void onDraw(Canvas canvas) {
         if (mFramingRect == null) {
             return;
@@ -144,10 +154,12 @@ public class MyViewFinderView extends View implements IViewFinder {
         int orientation = DisplayUtils.getScreenOrientation(getContext());
 
         if (orientation != Configuration.ORIENTATION_PORTRAIT) {
-            height = findDesiredDimensionInRange(LANDSCAPE_HEIGHT_RATIO, viewResolution.y, MIN_FRAME_HEIGHT, LANDSCAPE_MAX_FRAME_HEIGHT);
+            int landscapeMaxFrameWidth = (int) (1080 * landscapeHeightRatio); // = 5/8 * 1080
+            height = findDesiredDimensionInRange(landscapeHeightRatio, viewResolution.y, MIN_FRAME_HEIGHT, landscapeMaxFrameWidth);
             width = height;
         } else {
-            width = findDesiredDimensionInRange(PORTRAIT_WIDTH_RATIO, viewResolution.x, MIN_FRAME_WIDTH, PORTRAIT_MAX_FRAME_WIDTH);
+            int portraitMaxFrameWidth = (int) (1080 * portraitWidthRatio);
+            width = findDesiredDimensionInRange(portraitWidthRatio, viewResolution.x, MIN_FRAME_WIDTH, portraitMaxFrameWidth);
             height = width;
         }
 
@@ -166,4 +178,5 @@ public class MyViewFinderView extends View implements IViewFinder {
         }
         return dim;
     }
+
 }

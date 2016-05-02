@@ -97,6 +97,22 @@ public class ViewFinderView extends View implements IViewFinder {
         return mFramingRect;
     }
 
+    /**
+     * Not implemented
+     */
+    @Override
+    public void setPortraitWidthRatio(float portraitWidthRatio) {
+
+    }
+
+    /**
+     * Not implemented
+     */
+    @Override
+    public void setLandscapeHeightRatio(float landscapeHeightRatio) {
+
+    }
+
     @Override
     public void onDraw(Canvas canvas) {
         if(mFramingRect == null) {

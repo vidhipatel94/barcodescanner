@@ -27,6 +27,8 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
     private Boolean mFlashState;
     private boolean mAutofocusState = true;
     private boolean showScannerLine = false;
+    private float portraitWidthRatio = 0;
+    private float landscapeHeightRatio = 0;
 
     public BarcodeScannerView(Context context) {
         super(context);
@@ -98,6 +100,14 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
         scannerLine.setAnimation(mAnimation);
     }
 
+    public void setPortraitWidthRatio(float portraitWidthRatio) {
+        this.portraitWidthRatio = portraitWidthRatio;
+    }
+
+    public void setLandscapeHeightRatio(float landscapeHeightRatio) {
+        this.landscapeHeightRatio = landscapeHeightRatio;
+    }
+
     /**
      * <p>Method that creates view that represents visual appearance of a barcode scanner</p>
      * <p>Override it to provide your own view for visual appearance of a barcode scanner</p>
@@ -106,7 +116,14 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
      * @return {@link android.view.View} that implements {@link ViewFinderView}
      */
     protected IViewFinder createViewFinderView(Context context) {
-        return new MyViewFinderView(context);
+        MyViewFinderView myViewFinderView = new MyViewFinderView(context);
+        if (portraitWidthRatio > 0) {
+            myViewFinderView.setPortraitWidthRatio(portraitWidthRatio);
+        }
+        if (landscapeHeightRatio > 0) {
+            myViewFinderView.setLandscapeHeightRatio(landscapeHeightRatio);
+        }
+        return myViewFinderView;
     }
 
     public void showScannerLine(boolean isSet) {

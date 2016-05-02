@@ -34,6 +34,11 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
                 return new CustomViewFinderView(context);
             }
         };
+    /*  mScannerView = new ZXingScannerView(this);
+        mScannerView.setPortraitWidthRatio(4f / 8);
+        mScannerView.setLandscapeHeightRatio(4f / 8);
+        */
+
         mScannerView.showScannerLine(true);
         contentFrame.addView(mScannerView);
     }
@@ -90,6 +95,8 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
             float textPixelSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                     TRADE_MARK_TEXT_SIZE_SP, getResources().getDisplayMetrics());
             PAINT.setTextSize(textPixelSize);
+
+            setPortraitWidthRatio(5f / 8);
         }
 
         @Override

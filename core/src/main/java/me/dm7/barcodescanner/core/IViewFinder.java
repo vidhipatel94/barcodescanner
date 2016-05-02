@@ -37,4 +37,8 @@ public interface IViewFinder {
      * @return height of a view
      */
     int getHeight();
+
+    void setPortraitWidthRatio(float portraitWidthRatio);
+
+    void setLandscapeHeightRatio(float landscapeHeightRatio);
 }
