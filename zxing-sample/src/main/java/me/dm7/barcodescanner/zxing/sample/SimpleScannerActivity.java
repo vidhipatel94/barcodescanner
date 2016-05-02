@@ -7,21 +7,15 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.core.IViewFinder;
-import me.dm7.barcodescanner.core.ViewFinderView;
+import me.dm7.barcodescanner.core.MyViewFinderView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class SimpleScannerActivity extends BaseScannerActivity implements ZXingScannerView.ResultHandler {
@@ -40,6 +34,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
                 return new CustomViewFinderView(context);
             }
         };
+        mScannerView.showScannerLine(true);
         contentFrame.addView(mScannerView);
     }
 
@@ -74,7 +69,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
         }, 2000);
     }
 
-    private static class CustomViewFinderView extends ViewFinderView {
+    private static class CustomViewFinderView extends MyViewFinderView {
         public static final String TRADE_MARK_TEXT = "ZXing";
         public static final int TRADE_MARK_TEXT_SIZE_SP = 40;
         public final Paint PAINT = new Paint();
