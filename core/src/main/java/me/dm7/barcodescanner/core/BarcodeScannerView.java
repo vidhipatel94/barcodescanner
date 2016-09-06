@@ -78,7 +78,8 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
         int padding = MyViewFinderView.BORDER_STROKE_WIDTH;
         FrameLayout frameLayout = new FrameLayout(getContext());
         LayoutParams layoutParams = new LayoutParams(rect.width() - padding * 2, rect.height() - padding * 2);
-        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        layoutParams.topMargin = rect.top;
         frameLayout.setLayoutParams(layoutParams);
 
         final View scannerLine = new View(getContext());

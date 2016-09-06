@@ -97,6 +97,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
             PAINT.setTextSize(textPixelSize);
 
             setPortraitWidthRatio(6.9f / 8);
+          //  setTopOffset(20);
         }
 
         @Override

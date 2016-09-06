@@ -32,6 +32,8 @@ public class MyViewFinderView extends View implements IViewFinder {
     private float portraitWidthRatio = DEFAULT_PORTRAIT_WIDTH_RATIO;
     private float landscapeHeightRatio = DEFAULT_LANDSCAPE_HEIGHT_RATIO;
 
+    private int topOffset;
+
     protected Paint mLaserPaint;
     protected Paint mFinderMaskPaint;
     protected Paint mBorderPaint;
@@ -63,6 +65,8 @@ public class MyViewFinderView extends View implements IViewFinder {
         mBorderPaint.setStrokeWidth(mDefaultBorderStrokeWidth);
 
         mBorderLineLength = mDefaultBorderLineLength;
+
+        topOffset = DisplayUtils.getDeviceHeight(getContext()) / 4;
     }
 
     public void setLaserColor(int laserColor) {
@@ -79,6 +83,10 @@ public class MyViewFinderView extends View implements IViewFinder {
 
     public void setBorderLineLength(int borderLineLength) {
         mBorderLineLength = borderLineLength;
+    }
+
+    public void setTopOffset(int topOffset) {
+        this.topOffset = topOffset;
     }
 
     public void setupViewFinder() {
@@ -168,8 +176,8 @@ public class MyViewFinderView extends View implements IViewFinder {
             height = width;
         }
 
-        int leftOffset = (viewResolution.x - width) / 2;
-        int topOffset = (viewResolution.y - height) / 2;
+        int leftOffset = (int) ((viewResolution.x - width) / 2);
+        // int topOffset = (int) ((viewResolution.y - height) / 2.4);
         mFramingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
     }
 
