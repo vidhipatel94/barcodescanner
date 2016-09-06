@@ -154,12 +154,17 @@ public class MyViewFinderView extends View implements IViewFinder {
         int orientation = DisplayUtils.getScreenOrientation(getContext());
 
         if (orientation != Configuration.ORIENTATION_PORTRAIT) {
-            int landscapeMaxFrameWidth = (int) (1080 * landscapeHeightRatio); // = 5/8 * 1080
-            height = findDesiredDimensionInRange(landscapeHeightRatio, viewResolution.y, MIN_FRAME_HEIGHT, landscapeMaxFrameWidth);
+            int deviceHeight = DisplayUtils.getDeviceHeight(getContext());
+            height = (int) (deviceHeight * landscapeHeightRatio);
+//            int landscapeMaxFrameWidth = (int) (1080 * landscapeHeightRatio); // = 5/8 * 1080
+//            height = findDesiredDimensionInRange(landscapeHeightRatio, viewResolution.y, MIN_FRAME_HEIGHT, landscapeMaxFrameWidth);
             width = height;
+
         } else {
-            int portraitMaxFrameWidth = (int) (1080 * portraitWidthRatio);
-            width = findDesiredDimensionInRange(portraitWidthRatio, viewResolution.x, MIN_FRAME_WIDTH, portraitMaxFrameWidth);
+            int deviceWidth = DisplayUtils.getDeviceWidth(getContext());
+            width = (int) (deviceWidth * portraitWidthRatio);
+//            int portraitMaxFrameWidth = (int) (1080 * portraitWidthRatio);
+//            width = findDesiredDimensionInRange(portraitWidthRatio, viewResolution.x, MIN_FRAME_WIDTH, portraitMaxFrameWidth);
             height = width;
         }
 

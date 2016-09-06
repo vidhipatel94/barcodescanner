@@ -96,7 +96,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
                     TRADE_MARK_TEXT_SIZE_SP, getResources().getDisplayMetrics());
             PAINT.setTextSize(textPixelSize);
 
-            setPortraitWidthRatio(5f / 8);
+            setPortraitWidthRatio(6.9f / 8);
         }
 
         @Override
